@@ -1,29 +1,15 @@
 class Solution {
     public int majorityElement(int[] nums) {
-        int votes=1;
-        int majority_element=nums[0];
-        for(int i=1;i<nums.length;i++){
-            if(votes==0){
-                majority_element=nums[i];
-                votes++;
-            }
-            else if(majority_element!=nums[i]){
-                votes--;
-            }
-            else {
-                votes++;
-            }
+        Map<Integer,Integer> map=new HashMap<>();
+        int n=nums.length;
+        for(int i:nums){
+            map.put(i,map.getOrDefault(i,0)+1);
         }
-        int count=0;
-        for(int i=0;i<nums.length;i++){
-            if(nums[i]==majority_element){
-                count++;
-            }
+        for(int i:nums){
+            if(map.get(i)>n/2)
+                return  i;
         }
-
-        if(count>nums.length/2){
-            return majority_element;
-        }
-     return 0;   
+    return 0;
+        
     }
 }
